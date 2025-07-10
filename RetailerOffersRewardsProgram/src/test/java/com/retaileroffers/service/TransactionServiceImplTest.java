@@ -98,7 +98,7 @@ class TransactionServiceImplTest {
         List<Customer> customers = List.of(new Customer(), new Customer());
         when(customerRepo.findAll()).thenReturn(customers);
 
-        List<Customer> result = transactionService.getAllCustomers();
+        List<Customer> result = transactionService.getLast3MonthsAllCustomers();
 
         assertEquals(2, result.size());
         verify(customerRepo, times(1)).findAll();
