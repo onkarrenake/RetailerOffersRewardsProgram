@@ -101,8 +101,7 @@ PUT /transaction/save
 ```json
 {
   "amount": 120,
-  "customerId": 1,
-  "month": "2025-07"
+  "customerId": 1
 }
 ```
 
@@ -110,34 +109,76 @@ PUT /transaction/save
 
 ---
 
-### 2. Get Last 3 Months Points
-```
-GET /transaction/points/last3months?customerId=1
-```
-
-**Response**: List of `TransactionsDTO` with month-wise points.
-
-Here’s an expanded and more detailed section for the **API Endpoints** in the README:
-
----
-
-### 3. **Save Transaction**
+### 2. **Find All customers who did Transaction from last 3 Months**
 
 **Endpoint**:  
-`PUT /transaction/save`
+`GET /transaction/allCustomerLast3monthsPoints`
 
 **Description**:  
 Saves a new transaction for a customer and calculates reward points based on the transaction amount.
 
-
-**Request Body**:
+**Response Body**:
 ```
 json
-{
-  "amount": 120,
-  "customerId": 1,
-  "month": "2025-07"
-}
+[
+      {
+      "customerId": 5,
+      "name": "Ethan",
+      "emailId": "ethan@example.com",
+      "amount": 480,
+      "points": 315,
+      "date": "2025-07-01",
+      "traxDate": "2025-07-10",
+      "tranx":       [
+                  {
+            "txId": 36,
+            "amount": 120,
+            "date": "2025-07-10",
+            "earnPoints": 90
+         }
+      ]
+   },
+      {
+      "customerId": 20,
+      "name": "Alice",
+      "emailId": "alice@example.com",
+      "amount": 320,
+      "points": 210,
+      "date": "2025-07-04",
+      "traxDate": "2025-07-07",
+      "tranx":       [
+                  {
+            "txId": 1,
+            "amount": 120,
+            "date": "2025-07-04",
+            "earnPoints": 90
+         }
+      ]
+   },
+      {
+      "customerId": 4,
+      "name": "Diana",
+      "emailId": "diana@example.com",
+      "amount": 330,
+      "points": 210,
+      "date": "2025-07-01",
+      "traxDate": "2025-07-10",
+      "tranx":       [
+                  {
+            "txId": 34,
+            "amount": 120,
+            "date": "2025-07-10",
+            "earnPoints": 90
+         },
+                  {
+            "txId": 35,
+            "amount": 120,
+            "date": "2025-07-10",
+            "earnPoints": 90
+         }
+      ]
+   }
+]
 ```
 
 **Validations**:
@@ -152,10 +193,10 @@ json
 
 ---
 
-### 4. **Get Reward Points for Last 3 Months**
+### 3. **Get Reward Points for Last 3 Months**
 
 **Endpoint**:  
-`GET /transaction/points/last3months?customerId={id}`
+`GET /transaction/customerLast3monthsPoints?customerId=21`
 
 **Description**:  
 Fetches the reward points earned by a customer in the last 3 calendar months.
