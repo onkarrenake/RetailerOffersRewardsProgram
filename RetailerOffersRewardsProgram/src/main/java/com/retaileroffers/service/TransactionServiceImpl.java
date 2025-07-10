@@ -85,7 +85,9 @@ public class TransactionServiceImpl implements TransactionService {
 
 	// Collecting all customer details
 	@Override
-	public List<Customer> getAllCustomers() {
-		return customerRepo.findAll();
+	public List<Customer> getLast3MonthsAllCustomers() {
+		LocalDate threeMonths = LocalDate.now().minusMonths(3).withDayOfMonth(1);
+		return customerRepo.getLast3MonthsPointsSummary(threeMonths);
 	}
+
 }

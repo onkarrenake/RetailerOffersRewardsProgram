@@ -24,7 +24,7 @@ public interface TransactionService {
     /**
      * Retrieves all registered customers.
      */
-	public List<Customer> getAllCustomers();
+	public List<Customer> getLast3MonthsAllCustomers();
 
 	
 }
