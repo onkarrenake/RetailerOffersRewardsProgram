@@ -67,7 +67,7 @@ class TransactionControllerTest {
 	// Test for successful retrieval of all customers
 	@Test
 	void testAllCustomerDetails_Success() throws Exception {
-		when(txService.getAllCustomers()).thenReturn(List.of(new Customer(), new Customer()));
+		when(txService.getLast3MonthsAllCustomers()).thenReturn(List.of(new Customer(), new Customer()));
 
 		mockMvc.perform(get("/transaction/customer/allDetails")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.length()").value(2));
@@ -76,7 +76,7 @@ class TransactionControllerTest {
 	// Test for failure in retrieving all customers
 	@Test
 	void testAllCustomerDetails_Failure() throws Exception {
-		when(txService.getAllCustomers()).thenThrow(new RuntimeException("DB error"));
+		when(txService.getLast3MonthsAllCustomers()).thenThrow(new RuntimeException("DB error"));
 
 		mockMvc.perform(get("/transaction/customer/allDetails")).andExpect(status().isInternalServerError())
 				.andExpect(content().string("Not able to find customer list."));
