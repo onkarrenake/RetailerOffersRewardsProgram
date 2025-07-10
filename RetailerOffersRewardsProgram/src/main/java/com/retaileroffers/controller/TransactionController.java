@@ -41,6 +41,7 @@ public class TransactionController {
             Customer save = txService.saveTransaction(txData);
             return ResponseEntity.ok(save);
         } catch (Exception e) {
+        	e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Transaction failed.");
         }
     }
@@ -48,12 +49,13 @@ public class TransactionController {
     /**
      * Get all customer details
      */
-    @GetMapping("/customer/allDetails")
+    @GetMapping("/allCustomerLast3monthsPoints")
     public ResponseEntity<?> allCustomerDetails() {
         try {
-            List<Customer> save = txService.getAllCustomers();
-            return ResponseEntity.ok(save);
+            List<Customer> last3MonthsAllDetails = txService.getLast3MonthsAllCustomers();
+            return ResponseEntity.ok(last3MonthsAllDetails);
         } catch (Exception e) {
+        	e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not able to find customer list.");
         }
     }
@@ -61,12 +63,13 @@ public class TransactionController {
     /**
      * Retrieves reward points earned by a customer in the last 3 months.
      */
-    @GetMapping("/points/last3months")
+    @GetMapping("/customerLast3monthsPoints")
     public ResponseEntity<?> getCustomerLast3MonthsPoints(@RequestParam Long customerId) {
         try {
             List<TransactionsResponse> results = txService.getCustomerLast3MonthsPoints(customerId);
             return ResponseEntity.ok(results);
         } catch (CutomerNotFoundException e) {
+        	e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer or data not found.");
         }
     }
